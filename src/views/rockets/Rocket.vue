@@ -36,6 +36,18 @@
                 unit="KN"
               ></param-label>
             </div>
+            <div class="d-flex">
+              <param-label
+                title="高度"
+                param="56.97"
+                unit="m"
+              ></param-label>
+              <param-label
+                title="直径"
+                param="5"
+                unit="m"
+              ></param-label>
+            </div>
           </div>
           <!-- 整流罩部分 -->
           <div class="rocket_info_bottom">
@@ -43,7 +55,7 @@
             <p class="title">载荷质量</p>
             <div class="d-flex">
               <param-label
-                title="To GTO"
+                title="To LEO"
                 param="25"
                 unit="t"
               ></param-label>
@@ -124,6 +136,35 @@
               ></param-label>
             </div>
           </div>
+          <!-- 助推器 -->
+          <div class="rocket_info_bottom">
+            <p class="title blue--text">助推器</p>
+            <p class="title">4台"YF-100"液氧/煤油发动机</p>
+            <div class="d-flex">
+              <param-label
+                title="发动机"
+                param="2"
+                unit="台"
+              ></param-label>
+              <param-label
+                title="燃烧时间"
+                param="480+"
+                unit="s"
+              ></param-label>
+            </div>
+            <div class="d-flex">
+              <param-label
+                title="海平面推力"
+                param="100"
+                unit="t"
+              ></param-label>
+              <param-label
+                title="真空比冲"
+                param="421"
+                unit="s"
+              ></param-label>
+            </div>
+          </div>
         </div>
       </v-col>
       <v-col
@@ -154,19 +195,38 @@
 </template>
 
 <script>
-import RocketInfo from "./RocketInfo";
 import ParamLabel from "../../components/ParamLabel";
 
 export default {
   name: "Rocket1",
 
   components: {
-    ParamLabel,
-    RocketInfo
+    ParamLabel
   },
 
   data: () => ({
-    
+    rocket: {
+      id: '',
+      name_cn: '',
+      name_en: '',
+      weight: '',
+      thrust: '',//推力
+      height: '',
+      diameter: '', //直径
+      details: '',//描述
+      country: '',//国家
+      //整流罩
+      fairing: {
+        weight: '',
+        length: '',
+        diameter: ''// 直径
+      },
+      // 芯二级
+      third_stage: {
+        engine: '',
+        
+      } 
+    }
   })
 };
 </script>

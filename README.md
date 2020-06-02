@@ -1,19 +1,46 @@
-# rocket_shop
+**题目**：航天器图鉴网
 
-## Project setup
-```
-npm install
-```
+功能要求：
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. 火箭，飞船，发动机等的资料介绍
+2. 精美的火箭图片，壁纸
+3. 用户留言，后台管理员审核
+4. 后台管理， 管理员可在后台发布信息， 修改信息
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+* 火箭展示
+
+  ```
+  rocket {
+  	id,
+  	name_cn,
+  	name_en,
+  	outline,  概要
+  	cover_img,
+  	details, 详情
+  	
+  }
+  ```
+
+  * 火箭基本资料
+  * 火箭图片
+  * 评论
+
+* 发动机展示
+
+  * 发动机基本资料
+  * 发动机图片
+  * 评论
+
+* 飞船展示
+
+  * 发动机基本资料
+  * 发动机图片
+  * 评论
+
+* 航天服
+
+* 评论功能
+
+* 后台管理功能
