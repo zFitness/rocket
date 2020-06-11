@@ -4,7 +4,7 @@
     max-width="344"
   >
     <v-img
-      :src="rocket.img"
+      :src="rocket.coverImg"
       height="200px"
       position="end"
     ></v-img>
@@ -22,7 +22,7 @@
       <v-btn
         color="purple"
         text
-        :to="rocket.to"
+        :to="'/rocket/' + rocket.id"
       >
         探索
       </v-btn>
@@ -42,7 +42,7 @@
         <v-divider></v-divider>
 
         <v-card-text>
-          {{ rocket.desc }}
+          {{ rocket.details.slice(0, 30) + '...'}}
         </v-card-text>
       </div>
     </v-expand-transition>

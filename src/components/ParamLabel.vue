@@ -15,7 +15,7 @@ export default {
       type: String
     },
     param: {
-      type: String
+      type: Number
     },
     // 单位
     unit: {

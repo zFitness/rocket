@@ -8,17 +8,18 @@ const routes = [
     path: '/',
     name: 'IndexLayout',
     component: () => import('../views/layout/Layout.vue'),
-    redirect: 'rockets',
+    redirect: '/rockets',
     children: [
       {
-        path: 'rockets',
+        path: '/rockets',
         name: 'RocketList',
         component: () => import('../views/home/Home.vue'),
       },
       {
-        path: 'longmarch5',
-        name: 'LongMarch5',
+        path: '/rocket/:id',
+        name: 'rocket',
         component: () => import('../views/rockets/Rocket.vue'),
+        props: { default: true },
       },
     ],
   },
