@@ -23,6 +23,29 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component:() => import('../views/admin/Layout.vue'),
+    redirect: '/admin/rockets',
+    children: [
+      {
+        path: 'rockets',
+        name: 'Rockets',
+        component: () => import('../views/admin/RocketList.vue')
+      },
+      {
+        path: 'add',
+        name: 'RocketAdd',
+        component: () => import('../views/admin/Add.vue')
+      }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/admin/Login.vue')
+  }
   // {
   //   path: '/about',
   //   name: 'About',

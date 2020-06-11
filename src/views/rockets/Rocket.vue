@@ -57,7 +57,7 @@
             </div>
           </div>
           <!-- 整流罩部分 -->
-          <div class="rocket_info_bottom">
+          <div class="rocket_info_bottom" v-if="rocket.fairing != null">
             <p class="title blue--text">整流罩</p>
             <p class="title">载荷质量</p>
             <div class="d-flex">
@@ -86,7 +86,7 @@
             </p> -->
           </div>
           <!-- 芯二级 -->
-          <div class="rocket_info_bottom">
+          <div class="rocket_info_bottom" v-if="rocket.secondStage != null">
             <p class="title blue--text">芯二级</p>
             <p
               class="title"
@@ -118,7 +118,7 @@
             </div>
           </div>
           <!-- 芯一级 -->
-          <div class="rocket_info_bottom">
+          <div class="rocket_info_bottom" v-if="rocket.firstStage != null">
             <p class="title blue--text">芯一级</p>
             <p
               class="title"
@@ -196,16 +196,16 @@
         xs="12"
       >
         <img
-          src="../../assets/longmarch5.png"
+          :src="rocket.img"
           alt=""
           height="1200"
         >
       </v-col>
 
       <!-- 下边发射记录 -->
-      <v-col cols="12">
+      <!-- <v-col cols="12">
         <past-launche-table></past-launche-table>
-      </v-col>
+      </v-col> -->
       <!-- 图片壁纸 -->
       <v-col cols="12">
         <v-card color="transparent blue--text">
@@ -269,8 +269,9 @@ export default {
       id: 1,
       nameCn: "长征五号",
       nameEn: "Long march 5",
-      mass: -20.0,
+      mass: 20.0,
       thrust: 10524.0,
+      img: '',
       height: 56.97,
       diameter: 5.0,
       details:
@@ -282,33 +283,9 @@ export default {
         length: 12.267,
         diameter: 5.2
       },
-      firstStage: {
-        id: 1,
-        engine: 'YF-77"液氧/液氢发动机',
-        num: 2,
-        burnTime: 480,
-        specificImpulse: 421,
-        thrust: 10,
-        tag: 1
-      },
-      secondStage: {
-        id: 2,
-        engine: 'YF-75D"液氧/液氢发动机',
-        num: 2,
-        burnTime: 480,
-        specificImpulse: 434,
-        thrust: 17,
-        tag: 2
-      },
-      thirdStage: {
-        id: 3,
-        engine: '"YF-100"液氧/煤油发动机',
-        num: 2,
-        burnTime: 480,
-        specificImpulse: 333,
-        thrust: 100,
-        tag: 0
-      },
+      firstStage: null,
+      secondStage: null,
+      thirdStage: null,
       coverImg:
         "https://imgsa.baidu.com/forum/w%3D580/sign=585a2abdae44ad342ebf878fe0a30c08/9ed0c9ea15ce36d31c400b6035f33a87e850b184.jpg",
       booster: {
