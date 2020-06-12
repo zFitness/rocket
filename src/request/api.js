@@ -1,4 +1,4 @@
-import { get, post, upload } from './http'
+import { get, post, upload,postJson } from './http'
 
 // 提交表单
 export const apiAllRocketByCountry = () => get('/rocket')
@@ -13,5 +13,6 @@ export const apiLogin = (data) => post('/login',data)
 export const apiGetAll = () => get('/admin/rockets') 
 // 删除数据
 export const apiDelete = (id) => get(`/admin/delete/${id}`)
-export const apiAdd = (data) => post(`/admin/rockets`, data)
+export const apiAdd = (data) => postJson(`/admin/rockets`, data)
 export const apiUpload = (file) => upload('/upload/image', file)
+// 添加

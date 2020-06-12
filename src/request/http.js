@@ -77,6 +77,22 @@ export function post(url, data = {}) {
   })
 }
 
+// 发送json请求
+export function postJson(url, data = {}) {
+  return new Promise((resolve, reject) => {
+    axios.defaults.headers.post['Content-Type'] =
+      'application/json'
+    axios
+      .post(url, data)
+      .then((res) => {
+        resolve(res.data)
+      })
+      .catch((err) => {
+        reject(err.data)
+      })
+  })
+}
+
 export function upload(url, file) {
   return new Promise((resolve, reject) => {
     // let file = e.target.files[0]

@@ -45,6 +45,7 @@
       required
     ></v-text-field>
 
+    <!-- 描述 -->
     <v-textarea
       solo
       v-model="rocket.details"
@@ -66,7 +67,129 @@
       v-model="files1"
       @change="upload1"
     ></v-file-input>
-
+    <v-switch
+      v-model="isFairing"
+      label="开启整流罩"
+    ></v-switch>
+    <div v-if="isFairing">
+      <!-- 整流罩 -->
+      <v-text-field
+        v-model="rocket.fairing.mass"
+        label="质量"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.fairing.diameter"
+        label="直径"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.fairing.length"
+        label="长度"
+        required
+      ></v-text-field>
+    </div>
+    <!-- 芯一级 -->
+    <v-switch
+      v-model="isFirst"
+      label="开启第一级"
+    ></v-switch>
+    <div v-if="isFirst">
+      <v-text-field
+        v-model="rocket.firstStage.engine"
+        label="发动机"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.firstStage.thrust"
+        label="推力"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.firstStage.num"
+        label="数量"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.firstStage.specificImpulse"
+        label="比冲"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.firstStage.burnTime"
+        label="燃烧时间"
+        required
+      ></v-text-field>
+    </div>
+    <v-switch
+      v-model="isSecond"
+      label="开启第二级"
+    ></v-switch>
+    <div v-if="isSecond">
+      <v-text-field
+        v-model="rocket.secondStage.engine"
+        label="发动机"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.secondStage.thrust"
+        label="推力"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.secondStage.num"
+        label="数量"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.secondStage.specificImpulse"
+        label="比冲"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.secondStage.burnTime"
+        label="燃烧时间"
+        required
+      ></v-text-field>
+    </div>
+    <!-- 助推器 -->
+    <v-switch
+      v-model="isBooster"
+      label="开启助推器"
+    ></v-switch>
+    <div v-if="isBooster">
+      <v-text-field
+        v-model="rocket.booster.engine"
+        label="发动机"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.booster.thrust"
+        label="推力"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.booster.num"
+        label="每个助推器的发动机数量"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.booster.specificImpulse"
+        label="比冲"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.booster.burnTime"
+        label="燃烧时间"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="rocket.booster.engineNum"
+        label="助推器数量"
+        required
+      ></v-text-field>
+    </div>
+    <!--  -->
     <!-- :disabled="!valid" -->
     <v-btn
       color="success"
@@ -84,43 +207,43 @@ import { apiUpload, apiAdd } from "../../request/api";
 export default {
   data: () => ({
     valid: true,
+    isFirst: false,
+    isSecond: false,
+    isBooster: false,
+    isFairing: false,
     files: [],
     files1: [],
     rocket: {
-      nameCn: "长征1号",
-      nameEn: "Long march 5",
-      mass: -20.0,
-      thrust: 10524.0,
-      height: 56.97,
-      diameter: 5.0,
-      img: "",
-      details:
-        "长征五号系列由中国运载火箭技术研究院抓总研制，设计采用通用化、系列化、组合化思想。 系列由二级半构型的基本型长征五号运载火箭（CZ-5）、不加第二级的一级半构型长征五号B运载火箭（CZ-5B） 以及添加上面级的长征五号/远征二号运载火箭（CZ-5/YZ-2）组成，地球同步转移轨道和近地轨道运载能力将分别达到14吨级、25吨级 。 中国未来天宫空间站、北斗导航系统的建设，探月三期工程及其它深空探测的实施都将使用该火箭系列。china",
-      country: "中国",
-      // fairing: {
-      //   id: 1,
-      //   mass: 25.0,
-      //   length: 12.267,
-      //   diameter: 5.2
-      // },
-      // firstStage: {
-      //   id: 1,
-      //   engine: 'YF-77"液氧/液氢发动机',
-      //   num: 2,
-      //   burnTime: 480,
-      //   specificImpulse: 421,
-      //   thrust: 10,
-      //   tag: 1
-      // },
-      // secondStage: {
-      //   id: 2,
-      //   engine: 'YF-75D"液氧/液氢发动机',
-      //   num: 2,
-      //   burnTime: 480,
-      //   specificImpulse: 434,
-      //   thrust: 17,
-      //   tag: 2
-      // },
+      nameCn: null,
+      nameEn: null,
+      mass: null,
+      thrust: null,
+      height: null,
+      diameter: null,
+      img: null,
+      details:null,
+      country: null,
+      fairing: {
+        mass: null,
+        length: null,
+        diameter: null
+      },
+      firstStage: {
+        engine: null,
+        num: null,
+        burnTime: null,
+        specificImpulse: null,
+        thrust: null,
+        tag: 1
+      },
+      secondStage: {
+        engine: null,
+        num: null,
+        burnTime: null,
+        specificImpulse: null,
+        thrust: null,
+        tag: 2
+      },
       // thirdStage: {
       //   id: 3,
       //   engine: '"YF-100"液氧/煤油发动机',
@@ -130,14 +253,17 @@ export default {
       //   thrust: 100,
       //   tag: 0
       // },
-      coverImg:
-        "",
-      // booster: null
+      coverImg: null,
+      booster: {
+        engine: null,
+        num: null,
+        burnTime: null,
+        thrust: null,
+        specificImpulse: null,
+        engineNum: null
+      }
     },
-    nameCn: "",
-    nameEn: "",
-    email: "",
-    select: null,
+    select: [],
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: false
   }),
@@ -147,6 +273,9 @@ export default {
       // let data = { rocket: this.rocket };
       apiAdd(this.rocket).then(resp => {
         console.log(resp);
+        if(resp.code == 200) {
+          this.$router.push("/admin")
+        }
       });
     },
     upload() {
